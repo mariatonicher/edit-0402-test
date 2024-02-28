@@ -1,5 +1,6 @@
-const db = require("../db/mongodb");
+db = require("../db/mongodb");
 
+//task-1
 async function getPollById(pollId) {
   try {
     return await db
@@ -8,7 +9,7 @@ async function getPollById(pollId) {
       .findOne({ _id: db.toMongoID(pollId) });
   } catch (error) {
     console.log(error);
-    return null;
+    return [];
   }
 }
 
@@ -21,12 +22,24 @@ async function getAllPolls() {
   }
 }
 
+//pré task-1
 async function createdPoll(poll) {
   try {
     await db.getDB().collection(db.pollsCollection).insertOne({
       question: poll.question,
       options: poll.options,
     });
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}
+
+//task-2
+async function createPolls(polls) {
+  try {
+    await db.getDB().collection(db.pollsCollection).insertMany(polls);
+    return polls;
   } catch (error) {
     console.log(error);
     return [];
@@ -52,4 +65,5 @@ module.exports = {
   getAllPolls,
   deletePollById,
   createdPoll,
+  createPolls,
 };
