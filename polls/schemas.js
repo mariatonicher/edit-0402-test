@@ -7,6 +7,7 @@ const createPollSchema = Joi.object({
 
 const voteSchema = Joi.object({
   option: Joi.string().required(),
+  vote: Joi.number().required(),
 });
 
 module.exports = {

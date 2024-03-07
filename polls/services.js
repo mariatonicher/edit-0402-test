@@ -46,6 +46,32 @@ async function createPolls(polls) {
   }
 }
 
+//task-3
+async function votePoll(pollId, options) {
+  try {
+    const updateResult = await db
+      .getDB()
+      .collection(db.pollsCollection)
+      .updateOne(
+        {
+          _id: ObjectId(pollId),
+          options: ObjectId(options),
+        },
+        {
+          $inc: {
+            vote: 1,
+          },
+        }
+      );
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
+//task-4
+
+//delete
 async function deletePollById(pollId) {
   try {
     const result = await db
@@ -66,4 +92,5 @@ module.exports = {
   deletePollById,
   createdPoll,
   createPolls,
+  votePoll,
 };

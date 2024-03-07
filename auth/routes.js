@@ -2,6 +2,14 @@ const express = require("express");
 const router = express.Router();
 const schemas = require("./schemas");
 const services = require("./services");
+const auth = require("/middleware");
+
+//task-4 - https://medium.com/@developerom/jwt-authentication-using-node-js-4eff30bd2785
+router.get("/polls", auth, (req, res) => {
+  res.json({
+    message: "You are authorized to access this protected resource.",
+  });
+});
 
 router.post("/signin", async (req, res) => {
   const { error, value } = schemas.signinSchema.validate(req.body);

@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const db = require("../db/mongodb");
 
+
 async function findUserByID(id) {
   try {
     return await db
